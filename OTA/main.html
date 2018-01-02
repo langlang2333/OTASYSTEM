@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;">
+<head>
+    <meta charset="UTF-8">
+    <base target="_self">
+    <title id="title">版本列表</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="css/bootstrap-editable.css">
+    <link rel="stylesheet" href="assets/index.css">
+    <!--    <script src="assets/index.js"></script>
+        <script src="assets/ga.js"></script>-->
+    <script src="js/vue1.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min1.css">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css"/>
+    <!-- bootstrap-datetimepicker插件CSS-->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20140204/json2.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js "></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <![endif]-->
+    <style>
+        body{  font-family: "Microsoft YaHei","微软雅黑 Light","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; font-size:13px;}
+        .like{
+            width: 20%;
+            height: 30%;
+        }
+        .smallImg{
+            width: 30px;
+            height: 30px;
+        }
+        .red{
+            color: #FF0000
+        }
+        .green{
+            color:#20d44a
+        }
+        .yellow{
+            color:#FF9200
+        }
+        .orange{
+            color:#FF7100}
+        .nowwrp1{
+            overflow: hidden;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            width:90px;
+
+        }
+        .nowwrp{
+            white-space: nowrap;
+
+        }
+        .wrap-btn{
+            background: red;
+
+        }
+        .nav>li>a{
+            color:#999;
+            font-size:16px;
+            font-weight:400;}
+        .nav>li>a:hover{
+
+            background:none;
+        }
+        .nav>li>a:focus{
+            color:#FFF;
+            background:none;
+        }
+        .navbar .brand {
+            padding: 5px 20px 6px;
+            font-family: 'Telex',sans-serif;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+            font-weight: 200;
+        }
+        .navbar .brand {
+            display: block;
+            float: left;
+
+            margin-left: -20px;
+
+
+            color: #fff;
+            text-shadow: 0 1px 0 #54b4eb;
+            font-family: Helvetica, Georgia, Arial, sans-serif, 黑体;
+            font-size: 26px;
+            padding-left: 33px;
+        }
+
+        .navbar-inverse .navbar-nav>li>a {
+            color: #2fa4e7;
+            font-size: 18px;
+        }
+        .nav{
+            -ms-overflow-y:scroll;}
+
+        .nav-pills{
+            -ms-overflow-y:scroll;}
+        .nav-stacked{
+            -ms-overflow-y:scroll;}
+        .nav nav-pills nav-stacked{
+            -ms-overflow-y:scroll;}
+
+        .my-container {
+            float: left;
+            display: inline-block;
+            margin-right:30px;
+            margin-top: -15px;
+        }
+
+        .myLabel-content ,.myText-content,.myBtn-content{
+            float: left;
+            display: inline-block;
+
+        }
+        .myLabel-content,.myText-content input[type='text'],.myBtn-content .btn {
+            height: 34px;
+
+        }
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+        .btn-default {
+            margin-top: -4px;
+
+        }
+        #left, #right, #openClose {
+            float: left;
+        }
+        .nav>li>a:focus {
+            color: #FFF;
+            background: #1684c2;
+        }
+        nav>li:active{
+            color: #FFF;
+            background: #1684c2;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-image: linear-gradient(to bottom,#54b4eb,#2fa4e7);
+    background-repeat: repeat-x;
+    border: 1px solid #1990d5;">
+    <div class="">
+        <div class="navbar-header;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="brand" style="font-size: 26px;color: #fff"><span id="productName">OTA系统</span></div>
+            <ul class="nav pull-left" style="padding-top: 5px;">
+                <li style="float: left;"> <a  style="font-size:15px;text-decoration : none;color: #fff;    height: 50px;
+    margin-top: -5px;padding-top: 15px;"
+                        href="list1.html" target="mainFrame" title="">
+                    &nbsp;版本列表
+                </a></li>
+                <li style="float: left;"><a style="font-size:15px;text-decoration : none;color: #fff;    height: 50px;
+    margin-top: -5px;padding-top: 15px;"
+                       href="list2.html" target="mainFrame" title="">
+                    &nbsp;升级任务列表
+                </a></li>
+            </ul>
+            <ul id="signout" class="nav pull-right">
+
+                <li><a href="login.html" title="退出登录" style="color: #fff;font-size: 14px;margin-top: 4px;">退出</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+<div id="content" class="row-fluid" style="width: 100%;;height: 100vh;">
+
+    <div class="container" style="height: 100%; width: 100%;padding-left: 0;padding-right: 0;">
+        <iframe id="mainFrame" name="mainFrame" src="list1.html" style="overflow:scroll; height: 100%;" scrolling="auto" frameborder="no" width="100%" height="650"></iframe>
+    </div>
+</div>
+
+
+</body>
+
+<script>
+
+</script>
+
+
+</html>

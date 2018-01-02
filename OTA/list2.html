@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title id="title">固件升级</title>
+    <base target="_self">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="css/bootstrap-editable.css">
+    <link rel="stylesheet" href="main1.css">
+    <link rel="stylesheet" href="assets/index.css">
+    <script src="assets/index.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min1.css">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css"/>
+    <!-- bootstrap-datetimepicker插件CSS-->
+    <!--/jquery.文件-->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script type="text/javascript" src="js/moment.js"></script>
+    <!-- 最新的 Bootstrap 核心 Moment文件 -->
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 DateTime文件 -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20140204/json2.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js "></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <![endif]-->
+    <style>
+        body{  font-family: "Microsoft YaHei","微软雅黑 Light","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; font-size:13px;}
+
+        .red{
+            color: #FF0000
+        }
+        .green{
+            color:#20d44a
+        }
+        .yellow{
+            color:#FF9200
+        }
+        .orange{
+            color:#FF7100}
+        .nowwrp1{
+            overflow: hidden;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            width:90px;
+
+        }
+        .nowwrp{
+            white-space: nowrap;
+
+        }
+        .wrap-btn{
+            background: red;
+
+        }
+        .nav>li>a{
+            color:#999;
+            font-size:16px;
+            font-weight:400;}
+        .nav>li>a:hover{
+
+            background:none;
+        }
+        .nav>li>a:focus{
+            color:#FFF;
+            background:none;
+        }
+        .navbar .brand {
+            padding: 5px 20px 6px;
+            font-family: 'Telex',sans-serif;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+            font-weight: 200;
+        }
+
+        .navbar .brand {
+            display: block;
+            float: left;
+
+            margin-left: -20px;
+
+
+            color: #fff;
+            text-shadow: 0 1px 0 #54b4eb;
+            font-family: Helvetica, Georgia, Arial, sans-serif, 黑体;
+            font-size: 26px;
+            padding-left: 33px;
+        }
+
+        .navbar-inverse .navbar-nav>li>a {
+            color: #2fa4e7;
+            font-size: 18px;
+        }
+        .nav{
+            -ms-overflow-y:scroll;}
+
+        .nav-pills{
+            -ms-overflow-y:scroll;}
+        .nav-stacked{
+            -ms-overflow-y:scroll;}
+        .nav nav-pills nav-stacked{
+            -ms-overflow-y:scroll;}
+
+        .my-container {
+            float: left;
+            display: inline-block;
+            margin-right:30px;
+            margin-top: -15px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+        .btn-default {
+            margin-top: -4px;
+
+        }
+        .nav>li>a:focus {
+            color: #FFF;
+            background: #1684c2;
+        }
+    </style>
+</head>
+<body>
+<form id="formId" action="http://manager.rokyinfo.com:9777/v1/upgrade" method="post" target="_self" enctype="multipart/form-data">
+ <div id="addtask" style="position: fixed; top: 0px; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: none;z-index:909;left:0px;">
+    <div id="banner" style="width: 850px;height: 50px;background:#2fa4e7;  ;margin: 0 auto;margin-top: 100px;opacity: 1">
+        <p style="font-size: 18px; color:#FFF; font-weight:600;line-height: 28px;margin-left: 35px;padding-top: 12px">新增固件升级任务</p>
+    </div>
+    <div style="width: 850px;height: 600px;background: #FFF;margin: 0 auto;opacity: 1">
+
+            <div><p style="padding-top: 25px;padding-left: 35px; display: inline-block;font-size:15px;font-weight: 600;">筛选策略：</p></div>
+            <div style="width: 500px;">
+
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">厂商：</p><select  name="firmId" id="s1" class="changshang" style="width: 350px;height: 35px;border-radius: 5px;margin-left: 41px;">
+
+            </select>
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">DCU型号：</p><select name="dcuHardwareVersion" class="xinghao" style="width: 350px;height: 35px;border-radius: 5px;margin-left: 13px;"></select>
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">DCU版本号：</p><select name="dcuSoftwareVersion" class="banben" style="width: 350px;height: 35px;border-radius: 5px;"></select>
+            </div>
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">升级设备列表：</p>
+            <input type="file" name="upgradeUEFile" class="liebiao" accept=".xls,.xlsx" style="display: inline-block;margin-left: 40px;"/>
+            <span style="color: red;">(选择升级设备列表后将只会升级列表中的设备）</span>
+
+            <div><p style="padding-top: 25px;padding-left: 35px; display: inline-block;font-size:15px;font-weight: 600;">执行策略：</p></div>
+
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">车辆状态：</p><select name="carStatus" class="zhuangtai" style="width: 350px;height: 35px;border-radius: 5px;margin-left: 14px;">
+            <option value="" selected = "selected">无</option>
+            <option value="">设防</option>
+
+        </select>
+
+        <div style="margin-top: 20px;"><p style="padding-top: 25px;padding-left: 35px; display: inline-block">执行时间：</p>
+                <select name="runStrategy" class="shijian" style="width: 350px;height: 35px;border-radius: 5px;margin-left: 10px;">
+                    <option value="1" selected = "selected">立即执行</option>
+                    <option value="0">定时执行</option>
+                </select>
+            </div>
+
+
+
+            <button type="button" class="btn btn-default"  id="close2" style="margin-left: 380px;margin-top: 80px;">取 消</button>
+            <!--<input id="insertBtnImportSubmit" class="btn btn-primary" type="submit" style="margin-left: 30px;margin-top: 80px;" value="   提 交   "/>-->
+            <button type="button" class="btn btn-default" id="add1" style="margin-left: 30px;margin-top: 80px;background-color:#2fa4e7;color: #fff;">确定</button>
+
+
+
+
+
+
+    </div>
+ </div>
+</form>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-image: linear-gradient(to bottom,#54b4eb,#2fa4e7);
+    background-repeat: repeat-x;
+    border: 1px solid #1990d5;">
+    <div class="">
+        <div class="navbar-header;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="brand" style="font-size: 26px;color: #fff"><span id="productName">OTA系统</span></div>
+            <ul class="nav pull-left" style="padding-top: 5px;">
+                <li style="float: left;"> <a  style="font-size:15px;text-decoration : none;color: #fff;    height: 50px;
+    margin-top: -5px;padding-top: 15px;" href="list1.html" target="mainFrame" title="">
+                    &nbsp;版本列表
+                </a></li>
+                <li style="float: left;"><a style="font-size:15px;text-decoration : none;color: #fff;    height: 50px;
+    margin-top: -5px;padding-top: 15px;" href="list2.html" target="mainFrame" title="">
+                    &nbsp;升级任务列表
+                </a></li>
+            </ul>
+            <ul id="signout" class="nav pull-right">
+
+                <li><a href="login.html" title="退出登录" style="color: #fff;font-size: 14px;margin-top: 4px;">退出</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="content" style="width: 100%;height:750px;top: 60px;">
+    <div class="container" style="width:100%; margin-top:10px;">
+        <!--<div class="fixed-table-toolbar">-->
+            <!--<div class="columns columns-right btn-group pull-right">-->
+
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div id="toolbar">-->
+            <!--<div class="my-container">-->
+                <!--<div class="myText-content">-->
+                    <!--<button type="button" class="btn btn-primary" id="upload"-->
+                            <!--style="margin-top: -6px;background-image: linear-gradient(to bottom,#46aeea,#2fa4e7);-->
+                            <!--background-repeat: repeat-x;text-shadow: 0 -1px 0 rgba(0,0,0,0.25);background-color: #3daae9;-->
+                            <!--border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);">新增固件升级-->
+                    <!--</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div id="map"></div>-->
+        <div class="fixed-table-toolbar">
+            <div class="columns columns-right btn-group pull-left">
+                <button type="button" class="btn btn-primary" id="upload"
+                        style="margin-top: -6px;background-image: linear-gradient(to bottom,#46aeea,#2fa4e7);
+                            background-repeat: repeat-x;text-shadow: 0 -1px 0 rgba(0,0,0,0.25);background-color: #3daae9;
+                            border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);">新增固件升级
+                </button>
+            </div>
+        </div>
+        <table id="table" class="table table-hover"
+               data-search="false"
+               data-show-refresh="true"
+               data-show-toggle="false"
+               data-show-columns="true"
+               data-show-export="false"
+               data-minimum-count-columns="2"
+               data-pagination="true"
+               data-id-field="ccuSn"
+               data-page-list="[10, 20, 50, 100, ALL]"
+               data-show-footer="false"
+               data-side-pagination="server"
+               data-url="https://manager.rokyinfo.com:9777/v1/upgrade"
+
+               data-response-handler="responseHandler"></table>
+    </div>
+</div>
+</body>
+<script>
+
+    var $table = $('#table');
+    var  url ="http://manager.rokyinfo.com:9777/v1/upgrade";
+
+    function initTable() {
+        $table.bootstrapTable("destroy")
+        $table.bootstrapTable({
+            height: getHeight(),
+            url:url,
+            method: 'GET',
+            detailView : true,
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            cache: false,
+            striped: false,                              //是否显示行间隔色
+            minimumCountColumns: 2,
+            uniqueId: "id",
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 20,                       //每页的记录行数（*）
+            pageList: [10, 20, 100],        //可供选择的每页的行数（*）
+            responseHandler: responseHandler,
+            columns: [ {
+                field: 'id',
+                title: '序号',
+                align: 'center',
+                valign: 'middle'
+            },{
+                field: 'upgradeVersion',
+                title: '升级版本',
+                align: 'center',
+                valign: 'middle'
+            }, {
+                field: 'upgradeStrategy',
+                title: '升级策略',
+                align: 'center',
+                valign: 'middle',
+                formatter:upgradeformatter
+            },{
+                field: 'successful',
+                title: '执行状态（成功设备数/总设备数）',
+                align: 'center',
+                valign: 'middle',
+                formatter:statueformatter
+            },{
+                field: 'runStatus',
+                title: '运行状态',
+                align: 'center',
+                valign: 'middle'
+            },{
+                field: 'lastRunTime',
+                title: '最后运行时间',
+                align: 'center',
+                valign: 'middle',
+                formatter:lastformatter
+            },{
+                field: 'createTime',
+                title: '创建时间',
+                align: 'center',
+                valign: 'middle',
+                formatter:createformatter
+            }],
+            onExpandRow: function (index, row, $detail) {
+                initTable.InitSubTable(index, row, $detail);
+            },
+
+        });
+        // sometimes footer render error.
+    }
+
+    initTable.InitSubTable = function (index, row, $detail) {
+        var id2=row.id;
+        console.log(id2);
+
+        var url="http://manager.rokyinfo.com:9777/v1/upgradeDetail?upgradeId="+id2;
+        var cur_table = $detail.html('<table class="table table-hover"\n' +
+            'data-search="false"\n' +
+            'data-show-toggle="false"\n' +
+            'data-show-export="false"\n' +
+            'data-minimum-count-columns="2"\n' +
+            'data-pagination="true"\n' +
+            'data-id-field="ccuSn"\n' +
+            'data-page-list="[10, 20, 50, 100, ALL]"\n' +
+            'data-show-footer="false"\n' +
+            'data-side-pagination="server"\n' +
+            'data-response-handler="responseHandler"></table>').find('table');
+
+        $(cur_table).bootstrapTable({
+            url: url,
+            method: 'get',
+//            queryParams: { strParentID: parentid },
+//            ajaxOptions: { strParentID: parentid },
+            clickToSelect: true,
+            responseHandler: responseHandler,
+            pageSize: 10,
+            pageList: [10, 25],
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'ueSn',
+                title: '设备SN号'
+            }, {
+                field: 'currentVersion',
+                title: '当前版本'
+            }, {
+                field: 'runStatus',
+                title: '执行状态'
+            }, {
+                field: 'lastRunTime',
+                title: '最后运行时间'
+            }, ],
+            //无线循环取子表，直到子表里面没有记录
+//            onExpandRow: function (index, row, $Subdetail) {
+//                oInit.InitSubTable(index, row, $Subdetail);
+//            }
+        });
+    };
+
+
+    function statueformatter(value,row,index) {
+        var inner=row.successful+"/"+row.totalUE
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //执行状态
+
+    function upgradeformatter(value,row,index) {
+        var inner=row.upgradeStrategy
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //升级策略
+
+    function createformatter(value,row,index) {
+        var inner=row.createTime
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //创建时间
+
+    function lastformatter(value,row,index) {
+        var inner=row.lastRunTime
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //最后运行时间
+
+    function responseHandler(res) {
+
+        console.log(res.result);
+
+        if (res) {
+
+            return {
+                "rows" :res.result,
+                "total" : 2
+            };
+        } else {
+            return {
+                "rows" : [],
+                "total" : 0
+            };
+        }
+    }
+
+
+
+    $("#upload").on("click",function(){
+
+        $.ajax({
+            url: "http://manager.rokyinfo.com:9777/v1/firms",
+            method: "get",
+            contentType: "application/json; charset=utf-8",
+            processData:false,
+            contentType:false,
+            cache: false,
+
+            success: function (data) {
+                console.log(data)
+                seDate=data.result
+                console.log(seDate)
+
+                $(".then_remove1").remove()
+                var selectID = document.getElementsByClassName("changshang")[0]
+                seDate.forEach(function (x,i,f) {
+                    var newop = document.createElement("option")
+
+                    newop.innerHTML = x. firmName
+                    newop.value = x. id
+                    console.log(newop.value)
+                    var select = document.getElementById("s1");
+                    var value = select.value;
+                    console.log(value)
+                    newop.className = "then_remove1"
+                    selectID.appendChild(newop);
+                })
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+
+        $.ajax({
+            url: "http://manager.rokyinfo.com:9777/v1/dcuHardwareVersions",
+            method: "get",
+            contentType: "application/json; charset=utf-8",
+            processData:false,
+            contentType:false,
+            cache: false,
+
+            success: function (data) {
+                console.log(data)
+                seDate2=data.result
+                console.log(seDate2)
+
+                $(".then_remove2").remove()
+                var selectID2 = document.getElementsByClassName("xinghao")[0]
+                seDate2.forEach(function (x,i,f) {
+                    var newop2 = document.createElement("option")
+
+                    newop2.innerHTML = x. dcuHardwareVersion
+                    newop2.className = "then_remove2"
+                    selectID2.appendChild(newop2);
+                })
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+
+        $.ajax({
+            url: "http://manager.rokyinfo.com:9777/v1/dcuSoftwareVersions",
+            method: "get",
+            contentType: "application/json; charset=utf-8",
+            processData:false,
+            contentType:false,
+            cache: false,
+
+            success: function (data) {
+                console.log(data)
+                seDate3=data.result
+                console.log(seDate3)
+
+                $(".then_remove3").remove()
+                var selectID3 = document.getElementsByClassName("banben")[0]
+                seDate3.forEach(function (x,i,f) {
+                    var newop3 = document.createElement("option")
+
+                    newop3.innerHTML = x. dcuSoftwareVersion
+                    newop3.className = "then_remove3"
+                    selectID3.appendChild(newop3);
+                })
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+
+
+        $("#addtask").css("display","block")
+        $("#close2").on("click",function () {
+
+            $("#addtask").hide()
+        })
+    });
+    $("#add1").on("click",function () {
+
+        var a =$("#addtask  .changshang").val()
+        var b=$("#addtask  .xinghao").val()
+        var c=$("#addtask  .banben").val()
+        var d=$("#addtask  .liebiao").val()
+        var e=$("#addtask  .zhuangtai").val()
+        var f=$("#addtask  .shijian").val()
+
+
+
+        var data={
+            "firmId":a,
+            "dcuHardwareVersion":b,
+            "dcuSoftwareVersion":c,
+            "upgradeUEFile":d,
+            "carStatus":e,
+            "runStrategy":f
+
+
+        }
+
+
+        var formData = new FormData(document.getElementById("formId"));
+//        form.append("firmId",a);
+//        form.append("dcuHardwareVersion",b);
+//        form.append("dcuSoftwareVersion",c);
+//        form.append("upgradeUEFile",d);
+//        form.append("carStatus",e);
+//        form.append("runStrategy",f);
+        console.log(formData)
+        $.ajax({
+            url: "http://manager.rokyinfo.com:9777/v1/upgrade",
+            method: "post",
+            data:formData,
+            processData:false,
+            contentType:false,
+            success: function (res) {
+                console.log("成功")
+                alert("任务新增成功")
+                $table.bootstrapTable("refresh",{silent: true})
+                $("#addtask").hide()
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+    })
+
+
+
+</script>
+<script type="text/javascript">
+    function getHeight() {
+        return $(window).height() - $('h1').outerHeight(true) - $('nav').outerHeight(true) ;
+    }
+    initTable();
+    /*timer=setInterval(function () {
+         $table.bootstrapTable("refresh",{silent: true})
+        },50000)*/
+    $(window).resize(function () {
+        $table.bootstrapTable('resetView', {
+            height:$(window).height() - 70,
+        });
+    });
+
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            format: 'HH:mm',
+        })
+        $('#datetimepicker2').datetimepicker({
+            format: 'HH:mm',
+        });
+    });
+</script>
+</html>

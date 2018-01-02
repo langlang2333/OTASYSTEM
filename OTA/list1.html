@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title id="title">版本列表</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="css/bootstrap-editable.css">
+    <link rel="stylesheet" href="assets/index.css">
+    <!--    <script src="assets/index.js"></script>
+        <script src="assets/ga.js"></script>-->
+    <script src="js/vue1.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min1.css">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css"/>
+    <!-- bootstrap-datetimepicker插件CSS-->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20140204/json2.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js "></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <![endif]-->
+    <style>
+        body{  font-family: "Microsoft YaHei","微软雅黑 Light","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; font-size:13px;}
+
+        .red{
+            color: #FF0000
+        }
+        .green{
+            color:#20d44a
+        }
+        .yellow{
+            color:#FF9200
+        }
+        .orange{
+            color:#FF7100}
+        .nowwrp1{
+            overflow: hidden;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            width:90px;
+
+        }
+        .nowwrp{
+            white-space: nowrap;
+
+        }
+        .wrap-btn{
+            background: red;
+
+        }
+        .nav>li>a{
+            color:#999;
+            font-size:16px;
+            font-weight:400;}
+        .nav>li>a:hover{
+
+            background:none;
+        }
+        .nav>li>a:focus{
+            color:#FFF;
+            background:none;
+        }
+        .navbar .brand {
+            padding: 5px 20px 6px;
+            font-family: 'Telex',sans-serif;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+            font-weight: 200;
+        }
+
+        .navbar .brand {
+            display: block;
+            float: left;
+
+            margin-left: -20px;
+
+
+            color: #fff;
+            text-shadow: 0 1px 0 #54b4eb;
+            font-family: Helvetica, Georgia, Arial, sans-serif, 黑体;
+            font-size: 26px;
+            padding-left: 33px;
+        }
+
+        .navbar-inverse .navbar-nav>li>a {
+            color: #2fa4e7;
+            font-size: 18px;
+        }
+        .nav{
+            -ms-overflow-y:scroll;}
+
+        .nav-pills{
+            -ms-overflow-y:scroll;}
+        .nav-stacked{
+            -ms-overflow-y:scroll;}
+        .nav nav-pills nav-stacked{
+            -ms-overflow-y:scroll;}
+
+        .my-container {
+            float: left;
+            display: inline-block;
+            margin-right:30px;
+            margin-top: -15px;
+        }
+
+        .myLabel-content ,.myText-content,.myBtn-content{
+            float: left;
+            display: inline-block;
+
+        }
+        .myLabel-content,.myText-content input[type='text'],.myBtn-content .btn {
+            height: 34px;
+
+        }
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+        .btn-default {
+            margin-top: -4px;
+
+        }
+        .nav>li>a:focus {
+            color: #FFF;
+            background: #1684c2;
+        }
+
+    </style>
+</head>
+<body>
+<form id="formId" action="https://manager.rokyinfo.com:9777/v1/firmware" method="post" enctype="multipart/form-data">
+ <div id="addversion" style="position: fixed; top: 0px; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: none;z-index:909;left:0px;">
+    <div id="banner" style="width: 850px;height: 50px;background:#2fa4e7;  ;margin: 0 auto;margin-top: 100px;opacity: 1">
+        <p style="font-size: 18px; color:#FFF; font-weight:600;line-height: 28px;margin-left: 35px;padding-top: 12px">版本上传</p>
+    </div>
+    <div style="width: 850px;height: 610px;background: #FFF;margin: 0 auto;opacity: 1">
+
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">项目名称：</p><input type="text" class="form-control name" style="display: inline-block;width: 700px;margin-left: 16px;">
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">版本号：</p><input type="text" class="form-control versionID" style="display: inline-block;width: 700px;margin-left: 29px;">
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">发布日期：</p><input type="text" class="form-control date" style="display: inline-block;width: 700px;margin-left: 16px;">
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">基于版本：</p><input type="text" class="form-control base" style="display: inline-block;width: 700px;margin-left: 16px;">
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">版本发布人：</p><input type="text" class="form-control person" style="display: inline-block;width: 700px;margin-left: 3px;">
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">固件：</p><input type="file" class="gujian" style="display: inline-block;margin-left: 43px;"/>
+
+
+           <div>
+            <p style="padding-top: 25px;padding-left: 36px; display: inline-block">更新内容：</p>
+            <textarea  style="resize: none;width: 700px;height: 200px;overflow-y: scroll;margin-left: 13px;">
+            </textarea>
+           </div>
+            <button type="button" class="btn btn-default"  id="close1" style="margin-left: 380px;margin-top: 10px;">取 消</button>
+        <!--<input id="insertBtnImportSubmit" class="btn btn-primary" type="submit" style="margin-left: 30px;" value="   提 交   "/>-->
+            <button type="button" class="btn btn-default" id="add1" style="margin-left: 30px;margin-top:10px;background-color:#2fa4e7;color: #fff; ">确定</button>
+
+
+    </div>
+ </div>
+</form>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-image: linear-gradient(to bottom,#54b4eb,#2fa4e7);
+    background-repeat: repeat-x;
+    border: 1px solid #1990d5;">
+    <div class="">
+        <div class="navbar-header;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="brand" style="font-size: 26px;color: #fff"><span id="productName">OTA系统</span></div>
+            <ul class="nav pull-left" style="padding-top: 5px;">
+                <li style="float: left;"> <a  style="font-size:15px;text-decoration : none;color: #fff;    height: 50px;
+    margin-top: -5px;padding-top: 15px;" href="list1.html" target="mainFrame" title="">
+                    &nbsp;版本列表
+                </a></li>
+                <li style="float: left;"><a style="font-size:15px;text-decoration : none;color: #fff;    height: 50px;
+    margin-top: -5px;padding-top: 15px;" href="list2.html" target="mainFrame" title="">
+                    &nbsp;升级任务列表
+                </a></li>
+            </ul>
+            <ul id="signout" class="nav pull-right">
+
+                <li><a href="login.html" title="退出登录" style="color: #fff;font-size: 14px;margin-top: 4px;">退出</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="content" style="width: 100%;top: 60px;height: 850px">
+    <div class="container" style="width:100%; margin-top:10px;height:100%;">
+
+        <div class="fixed-table-toolbar">
+            <div class="columns columns-right btn-group pull-left">
+            <button type="button" class="btn btn-primary" id="upload"
+                    style="margin-top: -6px;background-image: linear-gradient(to bottom,#46aeea,#2fa4e7);
+                            background-repeat: repeat-x;text-shadow: 0 -1px 0 rgba(0,0,0,0.25);background-color: #3daae9;
+                            border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);">版本上传
+            </button>
+            </div>
+        </div>
+            <table id="table" class="table table-hover" style="overflow:scroll;"
+                   data-search="false"
+                   data-show-refresh="true"
+                   data-show-toggle="false"
+                   data-show-columns="true"
+                   data-show-export="false"
+                   data-minimum-count-columns="2"
+                   data-pagination="true"
+                   data-id-field="ccuSn"
+                   data-page-list="[10, 20, 50, 100, ALL]"
+                   data-show-footer="false"
+                   data-side-pagination="server"
+                   data-url="http://manager.rokyinfo.com:9777/v1/firmware"
+
+                   data-response-handler="responseHandler"></table>
+
+
+    </div>
+</div>
+</body>
+<script>
+    var $table = $('#table');
+    var  url ="http://manager.rokyinfo.com:9777/v1/firmware";
+    function initTable() {
+//        $table.bootstrapTable("destroy");
+        $table.bootstrapTable({
+            height:getHeight(),
+            url:url,
+            method: 'GET',
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            cache: false,
+            striped: false,                              //是否显示行间隔色
+            minimumCountColumns: 2,
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 20,                       //每页的记录行数（*）
+            pageList: [10, 20, 100],        //可供选择的每页的行数（*）
+            responseHandler: responseHandler,
+            columns: [{
+            field: 'id',
+            title: '序号',
+            align: 'center',
+            valign: 'middle'
+         },{
+            field: 'version',
+            title: '版本号',
+            align: 'center',
+            valign: 'middle'
+        }, {
+            field: 'releaseDate',
+            title: '发布日期',
+            align: 'center',
+            valign: 'middle',
+            formatter:releaseformatter
+        },{
+            field: 'baseVersion',
+            title: '基于版本',
+            align: 'center',
+            valign: 'middle',
+            formatter:baseVersionformatter
+        },{
+            field: 'releaser',
+            title: '发布人',
+            align: 'center',
+            valign: 'middle'
+        },{
+            field: 'issue',
+            title: '版本解决问题',
+            align: 'center',
+            valign: 'middle',
+            formatter:issueformatter
+        },{
+            field: 'downloadUrl',
+            title: '下载地址',
+            align: 'center',
+            valign: 'middle'
+        },{
+            field: 'createTime',
+            title: '创建时间',
+            align: 'center',
+            valign: 'middle',
+            formatter:createformatter
+        }]
+
+        });
+        // sometimes footer render error.
+    }
+    function releaseformatter(value,row,index) {
+        var inner=row.releaseDate
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //发布日期
+
+    function createformatter(value,row,index) {
+        var inner=row.createTime
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //创建时间
+
+    function issueformatter(value,row,index) {
+        var inner=row.issue
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    }  //解决问题
+
+    function baseVersionformatter(value,row,index) {
+        var inner=row.baseVersion
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //基于版本
+
+    function responseHandler(res) {
+
+        console.log(res.result);
+
+
+
+        if (res) {
+
+            return {
+                "rows" :res.result,
+                "total" :2
+            };
+        } else {
+            return {
+                "rows" : [],
+                "total" : 0
+            };
+        }
+    }
+
+    function getHeight() {
+        return $(window).height() - $('h1').outerHeight(true) - $('nav').outerHeight(true) ;
+    }
+    initTable();
+    /*timer=setInterval(function () {
+         $table.bootstrapTable("refresh",{silent: true})
+        },50000)*/
+    $(window).resize(function () {
+        $table.bootstrapTable('resetView', {
+            height:$(window).height() - 70,
+        });
+    });
+    $("#upload").on("click",function(){
+
+        $("#addversion").css("display","block")
+        $("#close1").on("click",function () {
+
+            $("#addversion").hide()
+        })
+    });
+    $("#add1").on("click",function () {
+
+        var a=$("#addversion  .name").val()
+        var b=$("#addversion  .versionID").val()
+        var c=$("#addversion  .date").val()
+        var d=$("#addversion  .base").val()
+        var e=$("#addversion  .person").val()
+        var f=$("#addversion  .gujian").val()
+        var g=$("#addversion  .cont").val()
+
+
+        var data={
+            "name":a,
+            "lat":b,
+            "lon":c,
+            "province":d,
+            "releaser":e,
+            "county":f,
+            "address":g
+
+        }
+
+        console.log(data)
+        var form = new FormData();
+        form.append("name",a);
+        form.append("lat",b);
+        form.append("lon",c);
+        form.append("province",d);
+        form.append("releaser",e);
+        form.append("county",f);
+        form.append("address",g);
+        console.log(form)
+        $.ajax({
+            url: "http://manager.rokyinfo.com:9777/v1/firmware",
+            method: "post",
+            data:form,
+            processData:false,
+            contentType:false,
+            success: function (res) {
+                console.log("成功")
+                alert("版本上传成功")
+                $table.bootstrapTable("refresh",{silent: true})
+                $("#addversion").hide()
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+    })
+
+</script>
+</html>
