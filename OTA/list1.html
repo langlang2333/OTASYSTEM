@@ -38,138 +38,45 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <![endif]-->
-    <style>
-        body{  font-family: "Microsoft YaHei","微软雅黑 Light","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; font-size:13px;}
 
-        .red{
-            color: #FF0000
-        }
-        .green{
-            color:#20d44a
-        }
-        .yellow{
-            color:#FF9200
-        }
-        .orange{
-            color:#FF7100}
-        .nowwrp1{
-            overflow: hidden;
-
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            width:90px;
-
-        }
-        .nowwrp{
-            white-space: nowrap;
-
-        }
-        .wrap-btn{
-            background: red;
-
-        }
-        .nav>li>a{
-            color:#999;
-            font-size:16px;
-            font-weight:400;}
-        .nav>li>a:hover{
-
-            background:none;
-        }
-        .nav>li>a:focus{
-            color:#FFF;
-            background:none;
-        }
-        .navbar .brand {
-            padding: 5px 20px 6px;
-            font-family: 'Telex',sans-serif;
-            text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
-            font-weight: 200;
-        }
-
-        .navbar .brand {
-            display: block;
-            float: left;
-
-            margin-left: -20px;
-
-
-            color: #fff;
-            text-shadow: 0 1px 0 #54b4eb;
-            font-family: Helvetica, Georgia, Arial, sans-serif, 黑体;
-            font-size: 26px;
-            padding-left: 33px;
-        }
-
-        .navbar-inverse .navbar-nav>li>a {
-            color: #2fa4e7;
-            font-size: 18px;
-        }
-        .nav{
-            -ms-overflow-y:scroll;}
-
-        .nav-pills{
-            -ms-overflow-y:scroll;}
-        .nav-stacked{
-            -ms-overflow-y:scroll;}
-        .nav nav-pills nav-stacked{
-            -ms-overflow-y:scroll;}
-
-        .my-container {
-            float: left;
-            display: inline-block;
-            margin-right:30px;
-            margin-top: -15px;
-        }
-
-        .myLabel-content ,.myText-content,.myBtn-content{
-            float: left;
-            display: inline-block;
-
-        }
-        .myLabel-content,.myText-content input[type='text'],.myBtn-content .btn {
-            height: 34px;
-
-        }
-        .myBtn-content .btn {
-            margin-bottom: 10px;
-        }
-        .btn-default {
-            margin-top: -4px;
-
-        }
-        .nav>li>a:focus {
-            color: #FFF;
-            background: #1684c2;
-        }
-
-    </style>
 </head>
 <body>
-<form id="formId" action="https://manager.rokyinfo.com:9777/v1/firmware" method="post" enctype="multipart/form-data">
+
+<form id="uploadForm" class="myform" action="http://manager.rokyinfo.com:9777/v1/firmware" method="post" onsubmit="return false" enctype="multipart/form-data">
  <div id="addversion" style="position: fixed; top: 0px; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: none;z-index:909;left:0px;">
-    <div id="banner" style="width: 850px;height: 50px;background:#2fa4e7;  ;margin: 0 auto;margin-top: 100px;opacity: 1">
+    <div id="banner" style="width: 855px;height: 50px;background-image: linear-gradient(to bottom,#54b4eb,#2fa4e7);
+         background-repeat: repeat-x;border: 1px solid #1990d5;margin: 0 auto;margin-top: 100px;opacity: 1">
         <p style="font-size: 18px; color:#FFF; font-weight:600;line-height: 28px;margin-left: 35px;padding-top: 12px">版本上传</p>
     </div>
-    <div style="width: 850px;height: 610px;background: #FFF;margin: 0 auto;opacity: 1">
+    <div style="width: 855px;height: 620px;background: #FFF;margin: 0 auto;opacity: 1">
 
-            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">项目名称：</p><input type="text" class="form-control name" style="display: inline-block;width: 700px;margin-left: 16px;">
-            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">版本号：</p><input type="text" class="form-control versionID" style="display: inline-block;width: 700px;margin-left: 29px;">
-            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">发布日期：</p><input type="text" class="form-control date" style="display: inline-block;width: 700px;margin-left: 16px;">
-            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">基于版本：</p><input type="text" class="form-control base" style="display: inline-block;width: 700px;margin-left: 16px;">
-            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">版本发布人：</p><input type="text" class="form-control person" style="display: inline-block;width: 700px;margin-left: 3px;">
-            <p style="padding-top: 25px;padding-left: 35px; display: inline-block">固件：</p><input type="file" class="gujian" style="display: inline-block;margin-left: 43px;"/>
-
+            <!--<p style="padding-top: 25px;padding-left: 35px; display: inline-block">项目名称：</p><input type="text" name="" class="form-control name" style="display: inline-block;width: 700px;margin-left: 16px;">-->
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block"><span style="color:red;">*</span>版本号：</p><input type="text" name="version" id="vID" class="form-control versionID"
+                                            style="display: inline-block;width: 700px;margin-left: 29px;">
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block"><span style="color:red;">*</span>发布日期：</p><input type="text" name="releaseDate" id="vDA" class="form-control date"
+                                            style="display: inline-block;width: 700px;margin-left: 16px;" >
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block"><span style="color:red;">*</span>基于版本：</p><input type="text" name="baseVerion" id="vBV" class="form-control base"
+                                            style="display: inline-block;width: 700px;margin-left: 16px;">
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block"><span style="color:red;">*</span>版本发布人：</p><input type="text" name="releaser" id="vRL" class="form-control person"
+                                            style="display: inline-block;width: 700px;margin-left: 3px;">
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block"><span style="color:red;">*</span>固件：</p>
+            <input type="file" name="firmwareFile" id="file1" class="gujian" style="display: inline-block;margin-left: 43px;width: 660px;"/>
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block"><span style="color:red;">*</span>硬件版本：</p><input type="text" name="hardwareVersion"
+                 id="vHV" class="form-control hardw" style="display: inline-block;width: 275px;margin-left: 16px;">
+            <p style="padding-top: 25px;padding-left: 35px; display: inline-block"><span style="color:red;">*</span>软件版本：</p><input type="text" name="softwareVersion"
+                 id="vSV" class="form-control softw" style="display: inline-block;width: 275px;margin-left: 26px;">
 
            <div>
-            <p style="padding-top: 25px;padding-left: 36px; display: inline-block">更新内容：</p>
-            <textarea  style="resize: none;width: 700px;height: 200px;overflow-y: scroll;margin-left: 13px;">
+            <p style="padding-top: 25px;padding-left: 36px; display: inline-block"><span style="color:red;">*</span>更新内容：</p>
+            <textarea name="issue" id="vIS" class="cont" style="resize: none;width: 700px;height: 200px;overflow-y: scroll;
+            margin-left: 13px;margin-top: 20px;">
             </textarea>
            </div>
-            <button type="button" class="btn btn-default"  id="close1" style="margin-left: 380px;margin-top: 10px;">取 消</button>
-        <!--<input id="insertBtnImportSubmit" class="btn btn-primary" type="submit" style="margin-left: 30px;" value="   提 交   "/>-->
-            <button type="button" class="btn btn-default" id="add1" style="margin-left: 30px;margin-top:10px;background-color:#2fa4e7;color: #fff; ">确定</button>
+            <button type="button" class="btn btn-default"  id="close1" style="margin-left: 360px;margin-top: 5px;">取 消</button>
+        <!--<input id="insertBtnImportSubmit" class="btn btn-primary" type="submit" style="margin-left:30px;" value="   提 交   "/>-->
+            <button type="button" class="btn btn-default" onclick="upload2()" id="add1" style="margin-left: 30px;margin-top:5px;background-image: linear-gradient(to bottom,#46aeea,#2fa4e7);
+                            background-repeat: repeat-x;text-shadow: 0 -1px 0 rgba(0,0,0,0.25);background-color: #3daae9;
+                            border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);color: #fff; ">确 定</button>
 
 
     </div>
@@ -241,6 +148,13 @@
     </div>
 </div>
 </body>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script type="text/javascript" src="js/moment.js"></script>
+<!-- 最新的 Bootstrap 核心 Moment文件 -->
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+<!-- 最新的 Bootstrap 核心 DateTime文件 -->
+
 <script>
     var $table = $('#table');
     var  url ="http://manager.rokyinfo.com:9777/v1/firmware";
@@ -255,9 +169,12 @@
             cache: false,
             striped: false,                              //是否显示行间隔色
             minimumCountColumns: 2,
+            queryParams:queryParams,
+
+            pagination: true,
             pageNumber: 1,                       //初始化加载第一页，默认第一页
             pageSize: 20,                       //每页的记录行数（*）
-            pageList: [10, 20, 100],        //可供选择的每页的行数（*）
+            pageList: [10, 20, 50, 100],        //可供选择的每页的行数（*）
             responseHandler: responseHandler,
             columns: [{
             field: 'id',
@@ -276,7 +193,7 @@
             valign: 'middle',
             formatter:releaseformatter
         },{
-            field: 'baseVersion',
+            field: 'baseVerion',
             title: '基于版本',
             align: 'center',
             valign: 'middle',
@@ -285,7 +202,20 @@
             field: 'releaser',
             title: '发布人',
             align: 'center',
-            valign: 'middle'
+            valign: 'middle',
+            formtter:releaserformatter
+        },{
+            field: 'hardwareVersion',
+            title: '硬件版本',
+            align: 'center',
+            valign: 'middle',
+            formatter:hardformatter
+        },{
+            field: 'softwareVersion',
+            title: '软件版本',
+            align: 'center',
+            valign: 'middle',
+            formatter:softformatter
         },{
             field: 'issue',
             title: '版本解决问题',
@@ -324,6 +254,30 @@
         ].join('');
     } //创建时间
 
+    function releaserformatter(value,row,index) {
+        var inner=row.releaser
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //发布人
+
+    function hardformatter(value,row,index) {
+        var inner=row.hardwareVersion
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //硬件版本
+
+    function softformatter(value,row,index) {
+        var inner=row.softwareVersion
+        var color='nowwrp'
+        return [
+            '<span class='+color+'>'+inner+'</span>'
+        ].join('');
+    } //软件版本
+
     function issueformatter(value,row,index) {
         var inner=row.issue
         var color='nowwrp'
@@ -333,7 +287,7 @@
     }  //解决问题
 
     function baseVersionformatter(value,row,index) {
-        var inner=row.baseVersion
+        var inner=row.baseVerion
         var color='nowwrp'
         return [
             '<span class='+color+'>'+inner+'</span>'
@@ -342,15 +296,12 @@
 
     function responseHandler(res) {
 
-        console.log(res.result);
-
-
 
         if (res) {
 
             return {
                 "rows" :res.result,
-                "total" :2
+                "total" : 60
             };
         } else {
             return {
@@ -358,6 +309,15 @@
                 "total" : 0
             };
         }
+    }
+    function queryParams(pageReqeust) {
+
+        var temp = {
+            offset: this.pageNumber-1,
+            limit: this.pageSize
+        };
+
+        return temp;
     }
 
     function getHeight() {
@@ -380,55 +340,78 @@
             $("#addversion").hide()
         })
     });
-    $("#add1").on("click",function () {
 
-        var a=$("#addversion  .name").val()
-        var b=$("#addversion  .versionID").val()
-        var c=$("#addversion  .date").val()
-        var d=$("#addversion  .base").val()
-        var e=$("#addversion  .person").val()
-        var f=$("#addversion  .gujian").val()
-        var g=$("#addversion  .cont").val()
+    function upload2() {
+        var Vid = document.getElementById("vID");
+        var Vda = document.getElementById("vDA");
+        var Vbv = document.getElementById("vBV");
+        var Vrl = document.getElementById("vRL");
+        var fileVal = document.getElementById("file1").value;
+        var Vhv = document.getElementById("vHV");
+        var Vsv = document.getElementById("vSV");
+        var str=document.getElementById("vIS").value.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+$)/g, "");
 
+        if(Vid.value.length==0){
+            alert("请输入版本号！");
+            Vid.focus();
+            return false;
+        }else if (Vda.value.length==0){
+            alert("请输入发布日期！");
+            Vda.focus();
+            return false;
+        }else if(Vbv.value.length==0){
+            alert("请输入基于版本！");
+            Vbv.focus();
+            return false;
+        }else if(Vrl.value.length==0){
+            alert("请输入版本发布人！");
+            Vrl.focus();
+            return false;
+        }else if(!fileVal){
+            alert("请选择固件文件！");
+            return false;
+        }else if(Vhv.value.length==0){
+            alert("请输入硬件版本！");
+            Vhv.focus();
+            return false;
+        }else if(Vsv.value.length==0){
+            alert("请输入软件版本！");
+            Vsv.focus();
+            return false;
+        }else  if(str==""){
+            alert("请输入更新内容！");
+            return false;
+        }else{
 
-        var data={
-            "name":a,
-            "lat":b,
-            "lon":c,
-            "province":d,
-            "releaser":e,
-            "county":f,
-            "address":g
-
+            var formData = new FormData($("#uploadForm")[0]);
+            $.ajax({
+                url: 'http://manager.rokyinfo.com:9777/v1/firmware',
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    console.log("成功");
+                    alert("版本上传成功");
+                    $table.bootstrapTable("refresh", {silent: true});
+                    $("#addversion").hide()
+                },
+                error: function (res) {
+                    console.log(msg)
+                }
+            });
         }
+    }
 
-        console.log(data)
-        var form = new FormData();
-        form.append("name",a);
-        form.append("lat",b);
-        form.append("lon",c);
-        form.append("province",d);
-        form.append("releaser",e);
-        form.append("county",f);
-        form.append("address",g);
-        console.log(form)
-        $.ajax({
-            url: "http://manager.rokyinfo.com:9777/v1/firmware",
-            method: "post",
-            data:form,
-            processData:false,
-            contentType:false,
-            success: function (res) {
-                console.log("成功")
-                alert("版本上传成功")
-                $table.bootstrapTable("refresh",{silent: true})
-                $("#addversion").hide()
-            },
-            error: function (err) {
-                console.log(err)
-            }
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#vDA').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
         });
-    })
-
+    });
 </script>
 </html>

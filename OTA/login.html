@@ -50,30 +50,6 @@
                 </div>
             </div>
         </div>
-        <div id="forget_model" class="login_padding" style="display:none">
-            <br>
-
-            <h1>Forgot password</h1>
-            <br>
-            <div class="forget_model_h2">(Please enter your registered email below and the system will automatically reset users’ password and send it to user’s registered email address.)</div>
-            <label>
-                <input type="text" id="usrmail" class="txt_input txt_input2">
-            </label>
-
-
-            <div class="rem_sub">
-                <div class="rem_sub_l">
-                </div>
-                <label>
-                    <input type="submit" class="sub_buttons" name="button" id="Retrievenow" value="Retrieve now" style="opacity: 0.7;">
-                    　　　
-                    <input type="submit" class="sub_button" name="button" id="denglou" value="Return" style="opacity: 0.7;">　　
-
-                </label>
-            </div>
-        </div>
-
-
 
 
 
@@ -91,10 +67,15 @@
 <script>
     $(function(){
         $('#button').click(function(){
+
+            var username = $('#username').val()
+            var userpwd = $('#userpwd').val()
+            if(username=="xuhuitao"||userpwd=="admin"){
                 window.location.href="main.html";
                 top.window.location="main.html";
-//            var username = $('#username').val()
-//            var userpwd = $('#userpwd').val()
+
+
+            }
 //
 //            // $.post('http://cjl3.rokyinfo.net:8010/auth/token ', {'username': username,'userpwd':userpwd}, function(data){// });
 //
@@ -118,8 +99,8 @@
 //                    sessionStorage.name=JSON.stringify(json.firmInfoEntityList)
 //                    sessionStorage.flag=json.firmInfoEntityList[0].flag;
 //                    sessionStorage.namedes=json.roles[0].name;
-//                    window.location.href="./main2.html";
-//                    top.window.location="./main2.html";
+//                    window.location.href="main.html";
+//                    top.window.location="main.html";
 //
 //
 //
